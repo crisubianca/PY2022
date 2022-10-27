@@ -1,3 +1,4 @@
+
 def p1(l1, l2):
     # p1: Write a function that receives as parameters two lists a and b and
     # returns a list of sets containing:
@@ -19,11 +20,18 @@ def p2(string):
     # sau - mai ineficient
     # return {ch: string.count(ch) for ch in string}
 
-def p3():
+def p3(dict1, dict2):
     # p3: Compare two dictionaries without using the operator "==" returning True or False.
     # (Attention, dictionaries must be recursively covered because they can contain other containers,
     # such as dictionaries, lists, sets, etc.)
-    return 1
+    for item1, item2 in dict1, dict2:
+        if type(item1) != type(item2):
+            return False
+        if type(item1) == type(item2) and item1 is dict or item1 is list or item1 is set:
+            return p3(item1, item2)
+        if item1 != item2:
+            return False
+    return True
 
 def p4(tag, content, **parameters):
     # p4: The build_xml_element function receives the following parameters:
@@ -137,7 +145,10 @@ def main():
     print("## RESULT P2 ##\n", p2("I love coffee!:)"))
 
     #p3:
-    print("## RESULT P3 ##\n", p3())
+    dict1 = {'Name': 'Ion', 'Age': {'check': [0,0]}}
+    dict2 = {'Name': 'Ion', 'Age': {'check': [0,0]}}
+    print("## RESULT P3 ##\n", p3(dict1, dict2))
+    print("\nHEADS UP! Nu merge bine! :(\n")
 
     #p4:
     print("## RESULT P4 ##\n", p4("a", "Hello There", href=" http://python.org ", _class=" my-link ", id=" someid"))
